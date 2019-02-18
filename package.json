@@ -1,0 +1,23 @@
+{
+    "name": "VUTTR",
+    "description": "Very Useful Tools to Remember",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "postinstall": "npm test",
+        "test": "npm start && dredd ./doc/api.apib http://localhost:3000",
+        "nodemon": "set PORT=3000 && nodemon vuttr",
+        "start": "set PORT=3000 && node vuttr"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "cookie-parser": "^1.4.4",
+        "dredd": "^8.0.0",
+        "express": "^4.16.4",
+        "express-load": "^1.1.16",
+        "helmet": "^3.15.1"
+    },
+    "devDependencies": {
+        "nodemon": "^1.18.10"
+    }
+}
