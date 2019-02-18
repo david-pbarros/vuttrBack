@@ -5,14 +5,18 @@ HOST: http://localhost
 
 # Group Tools
 
-## Gerenciamento de ferramentas [/tools]
-Rotas para o Gerenciamento de ferramentas do VUTTR
+## Gerenciamento de ferramentas [/tools{?tag}]
 
 ### Listar ferramentas [GET]
-+ Response 200 (application/json)
++ Parameters
+    + tag: node (string, optional) - Tag para refinar pesquisa.
+
++ Response 200 (application/json; charset=utf-8)
     + Attributes(array[ToolResponse])
-+ Response 404 (application/json)
++ Response 404 (application/json; charset=utf-8)
     + Attributes(Error)
+
+## Gerenciamento de ferramentas [/tools]
 
 ### Cadastrar uma ferramenta [POST]
 + Request Criar ferramentas
@@ -22,20 +26,19 @@ Rotas para o Gerenciamento de ferramentas do VUTTR
             Content-Type: application/json
 
     + Attributes(Tool)
-+ Response 201 (application/json)
++ Response 201 (application/json; charset=utf-8)
     + Attributes(ToolResponse)
-+ Response 400 (application/json)
++ Response 400 (application/json; charset=utf-8)
     + Attributes(Error)
 
 ## Gerenciamento de uma ferramenta [/tools/{id}]
-Rotas para o Gerenciamento de uma ferramenta do VUTTR
 
 ### Remover uma ferramenta [DELETE]
 + Parameters
     + id: 1 (number, required) - ID da ferramenta
 
-+ Response 202 (application/json)
-+ Response 404 (application/json)
++ Response 202
++ Response 404 (application/json; charset=utf-8)
     + Attributes(Error)
 
 # Data Structures
