@@ -1,0 +1,54 @@
+FORMAT: 1A
+HOST: http://localhost
+
+# Very Useful Tools to Remember para o Desafio BossaBox
+
+# Group Tools
+
+## Gerenciamento de ferramentas [/tools]
+Rotas para o Gerenciamento de ferramentas do VUTTR
+
+### Listar ferramentas [GET]
++ Response 200 (application/json)
+    + Attributes(array[ToolResponse])
++ Response 404 (application/json)
+    + Attributes(Error)
+
+### Cadastrar uma ferramenta [POST]
++ Request Criar ferramentas
+    + Headers
+    
+            Accept: application/json
+            Content-Type: application/json
+
+    + Attributes(Tool)
++ Response 201 (application/json)
+    + Attributes(ToolResponse)
++ Response 400 (application/json)
+    + Attributes(Error)
+
+## Gerenciamento de uma ferramenta [/tools/{id}]
+Rotas para o Gerenciamento de uma ferramenta do VUTTR
+
+### Remover uma ferramenta [DELETE]
++ Parameters
+    + id: 1 (number, required) - ID da ferramenta
+
++ Response 202 (application/json)
++ Response 404 (application/json)
+    + Attributes(Error)
+
+# Data Structures
+## Error (object)
++ code: 400 (number) - Codigo de retorno com valor default
++ message: Não Funcionou (string) - Mensagem de retorno
++ description: Erro ao executar a tarefa (string) - Descrição do erro
+
+## Tool (object)
++ title: hotel (string) - Titulo da ferramenta
++ link: https://github.com/typicode/hotel (string) - URL da ferramenta
++ description: Local app manager. Start apps within your browser (string) - Descrição da ferramenta
++ tags: node (array[string]) - Tags da ferramenta
+
+## ToolResponse (Tool)
++ id: 1 (number) - Identificador da ferramenta
