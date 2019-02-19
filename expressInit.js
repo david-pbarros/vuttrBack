@@ -7,7 +7,7 @@ module.exports = function() {
     var app = express();
 
     //variavel de ambiente
-    app.set('port', process.env.PORT || 80);
+    app.set('port', process.env.PORT || 3000);
 
     //middleware
     app.use(bodyParser.urlencoded({extended: true}));

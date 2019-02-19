@@ -1,9 +1,9 @@
 const express = require('express');
 
-module.exports = function() {
+module.exports = function(auth) {
     const router = express.Router();
 
-    router.get("/", function(req, res) {
+    router.get("/", auth.authenticate(), function(req, res) {
         let tag = req.query.tag;
 
         console.log(req);
