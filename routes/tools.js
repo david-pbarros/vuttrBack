@@ -21,7 +21,7 @@ module.exports = function(auth) {
           ]);
     });
 
-    router.post('/', function(req, res) {
+    router.post('/', auth.authenticate(), function(req, res) {
         let title = req.body.title;
         let link = req.body.link;
         let description = req.body.description;
@@ -36,7 +36,7 @@ module.exports = function(auth) {
         });
     });
 
-    router.delete('/:id', function(req, res) {
+    router.delete('/:id', auth.authenticate(), function(req, res) {
         let id = req.params.id;
 
         res.sendStatus(202);

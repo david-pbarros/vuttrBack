@@ -3,6 +3,16 @@ HOST: http://localhost
 
 # Very Useful Tools to Remember para o Desafio BossaBox
 
+#Group Authentication
+
+## Authentication [/auth/google]
+
+### Authenticate [POST]
++ Response 200 (application/json; charset=utf-8)
+    + Attributes(Token)
++ Response 403 (application/json; charset=utf-8)
+    + Attributes(Error)
+
 # Group Tools
 
 ## Gerenciamento de ferramentas [/tools{?tag}]
@@ -55,3 +65,6 @@ HOST: http://localhost
 
 ## ToolResponse (Tool)
 + id: 1 (number) - Identificador da ferramenta
+
+## Token (object)
++ token: 73j3kd7dheo40sls= (string) - Token de autenticação

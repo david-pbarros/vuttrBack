@@ -4,8 +4,9 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
+        "generateDoc": "aglio -i ./doc/api.apib --theme-full-width --no-theme-condense -o ./doc/api.html",
         "postinstall": "npm test",
-        "test": "npm start && dredd ./doc/api.apib http://localhost:3000",
+        "test": "./node_modules/.bin/dredd --config ./dredd/dredd.yml",
         "nodemon": "set PORT=3000 && nodemon vuttr",
         "start": "set PORT=3000 && node vuttr"
     },
