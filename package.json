@@ -5,6 +5,7 @@
     "private": true,
     "scripts": {
         "generateDoc": "aglio -i ./doc/api.apib --theme-full-width --no-theme-condense -o ./doc/api.html",
+        "dataBase": "database.sh",
         "postinstall": "npm test",
         "test": "./node_modules/.bin/dredd --config ./dredd/dredd.yml",
         "nodemon": "set PORT=3000 && nodemon vuttr",
@@ -18,9 +19,12 @@
         "express-load": "^1.1.16",
         "helmet": "^3.15.1",
         "jwt-simple": "^0.5.5",
+        "mysql2": "^1.6.5",
         "passport": "^0.4.0",
         "passport-google-oauth": "^1.0.0",
-        "passport-jwt": "^4.0.0"
+        "passport-jwt": "^4.0.0",
+        "sequelize": "^4.42.0",
+        "sequelize-cli": "^5.4.0"
     },
     "devDependencies": {
         "nodemon": "^1.18.10"
