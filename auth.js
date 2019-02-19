@@ -13,14 +13,12 @@ module.exports = function() {
     let strategy = new Strategy(params, function(payload, done) {
         let id = payload.id || null;
     
-        return done(null, {id: id});
+        if (id) {
+            return done(null, {id: id});
 
-        /*if (user) {
-            return done(null, {id: user.id});
-        
         } else {
-            return done(new Error("User not found"), null);
-        }*/
+            return done(new Error("User not found."), null);
+        }
     });
 
     let googleStrategy = new GoogleStrategy(
@@ -48,10 +46,9 @@ module.exports = function() {
             return passport.initialize();
         },
         authenticateJWT: function() {
-            return passport.authenticate("jwt", {session: false});
+            return passport.authenticate("jwt", {session: true});
         },
         authenticateGoogle: function() {
-            //return passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] });
             return passport.authenticate('google', { scope: ['profile'] });
         },
         googleCallBack: function() {
