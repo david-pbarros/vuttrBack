@@ -3,7 +3,7 @@ const express = require('express');
 module.exports = function(auth) {
     const router = express.Router();
 
-    router.get("/", auth.authenticate(), function(req, res) {
+    router.get("/", auth.authenticateJWT(), function(req, res) {
         let tag = req.query.tag;
 
         console.log(req);
@@ -21,7 +21,7 @@ module.exports = function(auth) {
           ]);
     });
 
-    router.post('/', auth.authenticate(), function(req, res) {
+    router.post('/', auth.authenticateJWT(), function(req, res) {
         let title = req.body.title;
         let link = req.body.link;
         let description = req.body.description;
@@ -36,7 +36,7 @@ module.exports = function(auth) {
         });
     });
 
-    router.delete('/:id', auth.authenticate(), function(req, res) {
+    router.delete('/:id', auth.authenticateJWT(), function(req, res) {
         let id = req.params.id;
 
         res.sendStatus(202);
