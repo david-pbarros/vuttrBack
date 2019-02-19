@@ -58,15 +58,4 @@ module.exports = function() {
             return passport.authenticate('google', { failureRedirect: '/' });
         }
     };
-    /*passport.use(new GoogleStrategy({
-            clientID: 172853201866-hodjlc4o784non7na52mbdip7do2n3ma.apps.googleusercontent.com,//GOOGLE_CLIENT_ID,
-            clientSecret: hFeFrIx7EXuXehdNjPWkj0tC,//GOOGLE_CLIENT_SECRET,
-            callbackURL: "http://localhost:3000/auth/google/callback"
-        },
-        function(accessToken, refreshToken, profile, cb) {
-            User.findOrCreate({ googleId: profile.id }, function (err, user) {
-                return cb(err, user);
-            });
-        }
-    ));*/
 };
