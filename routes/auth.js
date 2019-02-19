@@ -6,20 +6,8 @@ module.exports = function(auth) {
 
     router.get("/google", auth.authenticateGoogle());
 
-    /*router.get("/google", function(req, res) {
-        let user = true;
-        
-        if (user) {
-            var payload = {id: 44};
-            res.json({token: jwt.encode(payload, auth.secret)});
-
-        } else {
-            res.sendStatus(401);
-        }
-    });*/
-
-    router.get('/google/callback', auth.googleCallBack(), function(req, resp) {
-        resp.send("passou");
+    router.get('/google/callback', auth.googleCallBack(), function(req, res) {
+        res.json({token: jwt.encode({id: req.user.id}, auth.secret)});
     });
 
     return router;

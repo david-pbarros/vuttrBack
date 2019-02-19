@@ -13,8 +13,6 @@ reporter: []
 output: []
 header: []
 sorted: false
-authtype: oauth2
-user: dbcorpteste@gmail.com:1Pioneer!
 inline-errors: false
 details: false
 method: []

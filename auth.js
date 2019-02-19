@@ -30,7 +30,6 @@ module.exports = function() {
             callbackURL: "http://localhost:3000/auth/google/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            console.log(profile.id);
             return done(null, profile);
         }
     );
@@ -56,7 +55,7 @@ module.exports = function() {
             return passport.authenticate('google', { scope: ['profile'] });
         },
         googleCallBack: function() {
-            return passport.authenticate('google', { failureRedirect: '/login' });
+            return passport.authenticate('google', { failureRedirect: '/' });
         }
     };
     /*passport.use(new GoogleStrategy({
