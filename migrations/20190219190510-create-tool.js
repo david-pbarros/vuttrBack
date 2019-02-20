@@ -4,10 +4,9 @@ module.exports = {
     return queryInterface.createTable('Tool', {
       id: {
         allowNull: false,
-        autoIncrement: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        type: Sequelize.INTEGER
       },
       title: {
         type: Sequelize.STRING

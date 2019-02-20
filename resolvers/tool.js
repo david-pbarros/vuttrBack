@@ -1,27 +1,77 @@
 module.exports = function(app) {
     let db = app.data.db;
+    let sequelize = app.data.connection.sequelize;
+
+    function prepareFilter(tag) {        
+        if (tag) {
+            return sequelize.query('SELECT TOOLID FROM TAG WHERE NAME = $name',
+                                    { bind: { name: tag }, type: sequelize.QueryTypes.SELECT })
+                            .then(ids => {
+                                let itens = [];
+
+                                for (let x = 0; x < ids.length; x++) {
+                                    itens.push(ids[x].TOOLID);
+                                }
+                                
+                                return {'id': {$in: itens}};
+                            });
+            
+        } else {
+            return {};
+        }
+    }
+
+    function prepareTool(tool) {
+        let tags = null;
+
+        if (tool.Tags) {
+            tags = [];
+            
+            for (let x = 0; x < tool.Tags.length; x++) {
+                tags.push(tool.Tags[x].name);
+            }
+        }
+        
+        return {
+            id: tool.id,
+            title: tool.title,
+            link: tool.link,
+            description: tool.description,
+            tags: tags
+        }
+    }
+
+    function prepareTools(tools) {
+        let newTools = [];
+        for (x = 0; x < tools.length; x++) {
+            newTools.push(prepareTool(tools[x]));
+        }
+
+        return newTools;
+    }
 
     return {
         list: async function(tag) {
-            return await db.Tool
-                            .findAll({
-                                include: [{
-                                    model: db.Tag
-                                }]
-                            })
-                            .then(tools => {
-                                if (tools) {
-                                    //return tools;
-                                }
-                                
-                                return [];
-                            });
+            return db.Tool
+                        .findAll({
+                            include: [{
+                                model: db.Tag
+                            }],
+                            where: await prepareFilter(tag)
+                        })
+                        .then(tools => {
+                            if (tools) {
+                                return prepareTools(tools);
+                            }
+                            
+                            return [];
+                        });
         },
         create: function(tool) {
 
         },
         delete: function(id) {
-
+            return db.Tool.destroy({where: {id: id}});
         }
     }
 }

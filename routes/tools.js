@@ -4,8 +4,8 @@ module.exports = function(app) {
   const auth = app.resolvers.auth;  
   const router = express.Router();
 
-    router.get("/", auth.authenticateJWT(), function(req, res) {
-        res.json(app.resolvers.tool.list(req.query.tag));
+    router.get("/", auth.authenticateJWT(), async function(req, res) {
+        res.json(await app.resolvers.tool.list(req.query.tag));
     });
 
     router.post('/', auth.authenticateJWT(), function(req, res) {
@@ -23,10 +23,13 @@ module.exports = function(app) {
         });
     });
 
-    router.delete('/:id', auth.authenticateJWT(), function(req, res) {
-        let id = req.params.id;
-
+    router.delete('/:id', auth.authenticateJWT(), async function(req, res) {
+      if (await app.resolvers.tool.delete(req.params.id)) {
         res.sendStatus(202);
+
+      } else {
+        res.sendStatus(404);
+      }
     });
 
     return router;
