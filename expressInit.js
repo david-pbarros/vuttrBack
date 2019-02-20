@@ -32,14 +32,10 @@ module.exports = function() {
    
     app.bodyParser = bodyParser;
     
-    /*load('enums')
-        .then('data')
-        .then('systemProperties.js')
-        .then('api/resolvers')
-        .then('api/types')
-        .then('api/queryMutation')
-        .then('api')
-        .into(app);*/
+    load('data')
+        .then('resolvers')
+        .then('routes')
+        .into(app);
 
     return app;
 }

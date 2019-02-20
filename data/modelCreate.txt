@@ -1,0 +1,5 @@
+./node_modules/.bin/sequelize model:generate --name Tool --attributes title:string,link:string,description:string
+
+./node_modules/.bin/sequelize model:generate --name Tag --attributes name:string
+
+./node_modules/.bin/sequelize seed:generate --name demo-user

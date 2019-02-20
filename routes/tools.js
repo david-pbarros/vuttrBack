@@ -1,24 +1,11 @@
 const express = require('express');
 
-module.exports = function(auth) {
-    const router = express.Router();
+module.exports = function(app) {
+  const auth = app.resolvers.auth;  
+  const router = express.Router();
 
     router.get("/", auth.authenticateJWT(), function(req, res) {
-        let tag = req.query.tag;
-
-        console.log(req);
-
-        res.json([
-            {
-              "title": "hotel",
-              "link": "https://github.com/typicode/hotel",
-              "description": "Local app manager. Start apps within your browser",
-              "tags": [
-                tag
-              ],
-              "id": 1
-            }
-          ]);
+        res.json(app.resolvers.tool.list(req.query.tag));
     });
 
     router.post('/', auth.authenticateJWT(), function(req, res) {

@@ -1,7 +1,8 @@
 const express = require('express');
 const jwt = require("jwt-simple");
 
-module.exports = function(auth) {
+module.exports = function(app) {
+    const auth = app.resolvers.auth;
     const router = express.Router();
 
     router.get("/google", auth.authenticateGoogle());
