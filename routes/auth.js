@@ -8,8 +8,8 @@ module.exports = function(app) {
     router.get("/google", auth.authenticateGoogle());
 
     router.get('/google/callback', auth.googleCallBack(), function(req, res) {
-        req.session.userId = req.user.id;
-        
+        req.session.userId = req.user.id; 
+
         res.json({token: jwt.encode({id: req.user.id}, auth.secret)});
     });
 

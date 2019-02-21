@@ -1,5 +1,6 @@
 const express = require('express');
 const load = require('express-load');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 
@@ -8,6 +9,12 @@ module.exports = function() {
 
     //variavel de ambiente
     app.set('port', process.env.PORT || 3000);
+
+    app.use(session({
+        secret: "djdiw2l!!!",
+        duration: 30 * 60 * 1000,
+        activeDuration: 5 * 60 * 1000,
+    }));
 
     //middleware
     app.use(bodyParser.urlencoded({extended: true}));

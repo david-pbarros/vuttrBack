@@ -4,11 +4,9 @@
     const app = require('./expressInit')();
     const router = require('express').Router();
     const path = require('path');
-    //const auth = require('./resolvers/auth')();
-    const authRouter = require('./routes/auth');
-    const toolsRouter = require('./routes/tools');
 
-    app.use(app.resolvers.auth.initialize()); // Used to initialize passport
+    app.use(app.resolvers.auth.initialize());
+    app.use(app.resolvers.auth.session());
 
     router.get("/", function(req, res) {
         res.sendFile(path.join(__dirname+'/doc/api.html'));

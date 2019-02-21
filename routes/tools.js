@@ -4,7 +4,7 @@ module.exports = function(app) {
   const auth = app.resolvers.auth;  
   const router = express.Router();
 
-  router.get("/", auth.authenticateJWT(), async function(req, res) {
+  router.get("/", auth.authenticateJWT(), auth.checkUser, async function(req, res) {
     res.json(await app.resolvers.tool.list(req.query.tag));
   });
 

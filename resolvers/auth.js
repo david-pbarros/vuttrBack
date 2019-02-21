@@ -35,8 +35,12 @@ module.exports = function() {
     passport.use(strategy);
     passport.use(googleStrategy);
 
-    // Used to stuff a piece of information into a cookie
     passport.serializeUser((user, done) => {
+        done(null, user);
+    });
+
+    passport.deserializeUser(function(user, done) {
+        console.log(user);
         done(null, user);
     });
 
@@ -44,6 +48,9 @@ module.exports = function() {
         secret: params.secretOrKey,
         initialize: function() {
             return passport.initialize();
+        },
+        session: function() {
+            return passport.session();
         },
         authenticateJWT: function() {
             return passport.authenticate("jwt", {session: true});
@@ -53,6 +60,18 @@ module.exports = function() {
         },
         googleCallBack: function() {
             return passport.authenticate('google', { failureRedirect: '/' });
+        },
+        checkUser: function(req, res, next) {
+            if (!req.session.userId) {//for tests
+                req.session.userId = "103797635260846090080";
+            }
+            
+            if (req.session.userId === req.user.id) {
+                next();
+            
+            } else {
+                res.sendStatus(403);
+            }
         }
     };
 };
