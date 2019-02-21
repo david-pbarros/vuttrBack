@@ -23,8 +23,6 @@ HOST: http://localhost
 
 + Response 200 (application/json; charset=utf-8)
     + Attributes(array[ToolResponse])
-+ Response 404 (application/json; charset=utf-8)
-    + Attributes(Error)
 
 ## Gerenciamento de ferramentas [/tools]
 
@@ -47,7 +45,7 @@ HOST: http://localhost
 + Parameters
     + id: 1 (number, required) - ID da ferramenta
 
-+ Response 202
++ Response 200
 + Response 404 (application/json; charset=utf-8)
     + Attributes(Error)
 

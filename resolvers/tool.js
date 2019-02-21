@@ -24,20 +24,20 @@ module.exports = function(app) {
     function prepareTool(tool) {
         let tags = null;
 
-        if (tool.Tags) {
+        if (tool.tags) {
             tags = [];
             
-            for (let x = 0; x < tool.Tags.length; x++) {
-                tags.push(tool.Tags[x].name);
+            for (let x = 0; x < tool.tags.length; x++) {
+                tags.push(tool.tags[x].name);
             }
         }
         
         return {
-            id: tool.id,
             title: tool.title,
             link: tool.link,
             description: tool.description,
-            tags: tags
+            tags: tags,
+            id: tool.id
         }
     }
 
@@ -55,7 +55,8 @@ module.exports = function(app) {
             return db.Tool
                         .findAll({
                             include: [{
-                                model: db.Tag
+                                model: db.Tag,
+                                as: 'tags'
                             }],
                             where: await prepareFilter(tag)
                         })
@@ -68,7 +69,19 @@ module.exports = function(app) {
                         });
         },
         create: function(tool) {
+            let tags = tool.tags;
 
+            tool.tags = [];
+            for (let x = 0; x < tags.length; x++) {
+                tool.tags.push({name: tags[x]});
+            }           
+            
+            return db.Tool.create(tool, {
+                                include: [{association: db.Tool.tags}]
+                            })
+                            .then(tool => {
+                                return prepareTool(tool);
+                            });
         },
         delete: function(id) {
             return db.Tool.destroy({where: {id: id}});

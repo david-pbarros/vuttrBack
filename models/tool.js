@@ -6,8 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING
   }, {});
   Tool.associate = function(models) {
-    Tool.hasMany(models.Tag, {
+    Tool.tags = Tool.hasMany(models.Tag, {
       foreignKey: 'toolId',
+      as: 'tags',
       onDelete: 'CASCADE'
     });
   };
